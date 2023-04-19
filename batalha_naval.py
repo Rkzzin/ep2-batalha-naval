@@ -1,0 +1,3 @@
+# Funções
+
+# Loop do jogo
