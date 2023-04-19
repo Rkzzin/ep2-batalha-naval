@@ -14,6 +14,8 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
 
     return posicoes
 
+
+# Teste da função
 linha = 2
 coluna = 4
 orientacao = "vertical"
