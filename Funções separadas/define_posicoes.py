@@ -13,3 +13,10 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
             posicoes.append([linha + i, coluna])
 
     return posicoes
+
+linha = 2
+coluna = 4
+orientacao = "vertical"
+tamanho = 3
+
+print(define_posicoes(linha, coluna, orientacao, tamanho))
