@@ -49,5 +49,17 @@ def posiciona_frota(frota):
                 tabuleiro[posicao[i][0]][posicao[i][1]] = 1
     return tabuleiro
 
+# Conta o número de navios afundados
+def afundados(frota,tabuleiro):
+    afundados=0
+    for navio in frota:
+        i=0
+        for posicoes in frota[navio]:
+            i=0
+            for posicao in posicoes:
+                if tabuleiro[posicao[0]][posicao[1]]=='X':
+                    i+=1
+            if i == len(posicoes):
+                afundados+=1
+    return afundados
 
-## Loop do jogo ##
