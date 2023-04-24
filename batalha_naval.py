@@ -80,3 +80,20 @@ def afundados(frota, tabuleiro):
     
     return afundados
 
+# Função que verifica se a posição é válida para o novo navio
+def posicao_valida(frota, linha, coluna, orientacao, tamanho):
+    novas_posicoes = define_posicoes(linha, coluna, orientacao, tamanho)
+
+    # Verifica se as posições estão fora do tabuleiro
+    for nova_posicao in novas_posicoes:
+        if nova_posicao[0] < 0 or nova_posicao[0] > 9 or nova_posicao[1] < 0 or nova_posicao[1] > 9:
+            return False
+
+    # Verifica se as posições já estão ocupadas
+    for posicoes_ocupadas in frota.values():
+        for posicoes in posicoes_ocupadas:
+            for posicao in posicoes:
+                if posicao in novas_posicoes:
+                    return False
+
+    return True
