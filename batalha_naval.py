@@ -31,35 +31,52 @@ def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
 
     return frota
 
-# Faz a jogada e confere se acertou
-def faz_jogada(tabuleiro,linha,coluna):
-    if tabuleiro[linha][coluna]==1:
-        tabuleiro[linha][coluna]='X'
+# Faz a jogada e confere se acertou ou errou
+def faz_jogada(tabuleiro, linha, coluna):
+
+    # Caso tenha navio na posição, substitui o 1 por X
+    if tabuleiro[linha][coluna] == 1:
+        tabuleiro[linha][coluna] = 'X'
+
+    # Caso não tenha navio na posição, substitui o 0 por -
     else:
-        tabuleiro[linha][coluna]='-'
+        tabuleiro[linha][coluna] = '-'
+
     return tabuleiro
+
 
 # Retorna o tabuleiro com as posições dos navios
 def posiciona_frota(frota):
-    tabuleiro=[[0]*10 for _ in range(10)]
-    for navio, posicoes in frota.items():
+    # Cria o tabuleiro
+    tabuleiro = [[0]*10 for _ in range(10)]
+
+    # Preenche o tabuleiro com as posições da frota
+    for posicoes in frota.values():
+        
+        # Percorre as posições do navio e marca-as no tabuleiro
         for posicao in posicoes:
-            tamanho=len(posicao)
+            tamanho = len(posicao)
             for i in range(tamanho):
                 tabuleiro[posicao[i][0]][posicao[i][1]] = 1
+
     return tabuleiro
 
+
 # Conta o número de navios afundados
-def afundados(frota,tabuleiro):
-    afundados=0
+def afundados(frota, tabuleiro):
+    afundados = 0
+
+    # Percorre a frotas e conta os navios afundados
     for navio in frota:
-        i=0
+        
+        # Percorre as posições do navio e verifica se todas foram atingidas
         for posicoes in frota[navio]:
-            i=0
+            i = 0
             for posicao in posicoes:
-                if tabuleiro[posicao[0]][posicao[1]]=='X':
-                    i+=1
+                if tabuleiro[posicao[0]][posicao[1]] == 'X':
+                    i += 1
             if i == len(posicoes):
-                afundados+=1
+                afundados += 1
+    
     return afundados
 

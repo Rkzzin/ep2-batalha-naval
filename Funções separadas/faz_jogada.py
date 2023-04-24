@@ -1,7 +1,28 @@
-def faz_jogada(tabuleiro,linha,coluna):
-    if tabuleiro[linha][coluna]==1:
-        tabuleiro[linha][coluna]='X'
+# Realiza a jogada do usuário
+def faz_jogada(tabuleiro, linha, coluna):
+    # Caso tenha navio na posição, substitui o 1 por X
+    if tabuleiro[linha][coluna] == 1:
+        tabuleiro[linha][coluna] = 'X'
+
+    # Caso não tenha navio na posição, substitui o 0 por -
     else:
-        tabuleiro[linha][coluna]='-'
+        tabuleiro[linha][coluna] = '-'
     return tabuleiro
 
+tabuleiro = [
+  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 1, 1, 1, 1, 0],
+  [0, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 1, 0, 1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+  [0, 1, 1, 1, 0, 0, 0, 1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+  [0, 1, 1, 0, 0, 0, 0, 0, 0, 0]
+]
+
+linha = 1
+coluna = 1
+resultado = faz_jogada(tabuleiro, linha, coluna)
+print(resultado)
