@@ -40,5 +40,5 @@ coluna = 7
 orientacao = 'vertical'
 tamanho = 3
 
-resultado = preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho)
-print(resultado)
+frota = preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho)
+print(frota)
