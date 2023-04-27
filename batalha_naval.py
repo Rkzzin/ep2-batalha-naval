@@ -133,7 +133,7 @@ frota_oponente = {
         [[2, 7]],
         [[0, 6]],
         [[9, 7]],
-        [[7, 6]]
+        [[9, 6]]
     ]
 }
 
@@ -279,3 +279,5 @@ while jogando:
         if afundados(frota_jogador, tabuleiro_jogador) == 10:
             print('Xi! O oponente derrubou toda a sua frota =(')
             jogando = False
+
+            
