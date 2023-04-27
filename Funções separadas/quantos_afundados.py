@@ -1,4 +1,4 @@
-# Conta o número de navios afundados
+# Define o número de navios afundados
 def afundados(frota, tabuleiro):
     afundados = 0
 

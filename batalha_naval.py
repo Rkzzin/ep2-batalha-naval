@@ -9,7 +9,7 @@ import random as rd
 ###### DEFINIÇÃO DAS FROTAS ######
 ##################################
 
-# Frota do oponente:
+####### Frota do oponente #######
 frota_oponente = {
     'porta-aviões': [
         [[9, 1], [9, 2], [9, 3], [9, 4]]
@@ -32,8 +32,7 @@ frota_oponente = {
 }
 
 
-# Frota do jogador:
-
+####### Frota do jogador #######
 # Parâmetros:
 disponíveis = ['porta-aviões', 'navio-tanque', 'contratorpedeiro', 'submarino']
 lista_tamanhos = [4, 3, 2, 1]
@@ -87,10 +86,10 @@ while quantidade_embarcacoes < 10:
         print('Esta posição não está válida!')
 
 
+
 # Criando os tabuleiros do jogo 
 tabuleiro_oponente = posiciona_frota(frota_oponente)
 tabuleiro_jogador = posiciona_frota(frota_jogador)
-
 
 ########################################
 ######## LOOP PRINCIPAL DO JOGO ########
@@ -100,6 +99,7 @@ jogando = True
 jogadas_jogador = []
 jogadas_oponente = []
 
+# Loop principal do jogo:
 while jogando:
 
     # Printa os tabuleiros:
@@ -126,27 +126,33 @@ while jogando:
 
         print(f'A posição linha {linha} e coluna {coluna} já foi informada anteriormente!')
 
+        # Linha a ser atacada:
         linha = int(input('Linha: '))
         while linha < 0 or linha > 9:
             print('Linha inválida!')
             linha = int(input('Linha: '))
+        
+        # Coluna a ser atacada:
         coluna = int(input('Coluna: '))
         while coluna < 0 or coluna > 9:
             print('Coluna inválida!')
             coluna = int(input('Coluna: '))
+        
 
+    # Adicionando a jogada na lista de jogadas:
     jogadas_jogador.append([linha, coluna])
     
 
     # Faz a jogada e verifica se afundou algum navio:
     tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha, coluna)
 
+    # Verifica se o jogador afundou todos os navios do oponente:
     if afundados(frota_oponente, tabuleiro_oponente) == 10:
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
     
-    else:
 
+    else:
         ###################################
         ######## VEZ DO OPONENTE ##########
         ###################################
@@ -155,16 +161,20 @@ while jogando:
         linha = rd.randint(0, 9)
         coluna = rd.randint(0, 9)
 
+        # Verifica se a posição já foi informada anteriormente:
         while [linha, coluna] in jogadas_oponente:
             linha = rd.randint(0, 9)
             coluna = rd.randint(0, 9)
 
+        # Adicionando a jogada na lista de jogadas:
         jogadas_oponente.append([linha, coluna])
 
         print(f'Seu oponente está atacando na linha {linha} e coluna {coluna}')
 
+        # Faz a jogada e verifica se afundou algum navio:
         tabuleiro_jogador = faz_jogada(tabuleiro_jogador, linha, coluna)
 
+        # Verifica se o oponente afundou todos os navios do jogador:
         if afundados(frota_jogador, tabuleiro_jogador) == 10:
             print('Xi! O oponente derrubou toda a sua frota =(')
             jogando = False
