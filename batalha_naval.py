@@ -207,6 +207,10 @@ jogadas = []
 while jogando:
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
 
+    ###################################
+    ######## VEZ DO JOGADOR ###########
+    ###################################
+
     # Linha a ser atacada:
     linha = int(input('Em que linha deseja atacar? '))
     while linha < 0 or linha > 9:
@@ -232,6 +236,5 @@ while jogando:
     navios_afundados = afundados(frota_oponente, tabuleiro_oponente)
 
     if navios_afundados == 10:
+        print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
-
-print('Parabéns! Você derrubou todos os navios do seu oponente!')
