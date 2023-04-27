@@ -18,7 +18,6 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
 
     return posicoes
 
-
 # Preenche a frota com os navios
 def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
 
@@ -33,12 +32,11 @@ def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
 
     return frota
 
-
 # Faz a jogada e confere se acertou ou errou
 def faz_jogada(tabuleiro, linha, coluna):
 
     # Caso tenha navio na posição, substitui o 1 por X
-    if tabuleiro[linha][coluna] == 1:
+    if tabuleiro[linha][coluna] == 1 or tabuleiro[linha][coluna] == 'X':
         tabuleiro[linha][coluna] = 'X'
 
     # Caso não tenha navio na posição, substitui o 0 por -
@@ -46,7 +44,6 @@ def faz_jogada(tabuleiro, linha, coluna):
         tabuleiro[linha][coluna] = '-'
 
     return tabuleiro
-
 
 # Retorna o tabuleiro com as posições dos navios
 def posiciona_frota(frota):
@@ -63,7 +60,6 @@ def posiciona_frota(frota):
                 tabuleiro[posicao[i][0]][posicao[i][1]] = 1
 
     return tabuleiro
-
 
 # Conta o número de navios afundados
 def afundados(frota, tabuleiro):
@@ -83,7 +79,6 @@ def afundados(frota, tabuleiro):
     
     return afundados
 
-
 # Função que verifica se a posição é válida para o novo navio
 def posicao_valida(frota, linha, coluna, orientacao, tamanho):
     novas_posicoes = define_posicoes(linha, coluna, orientacao, tamanho)
@@ -102,7 +97,6 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
 
     return True
 
-
 # Função que printa o tabuleiro
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     texto = ''
@@ -114,6 +108,8 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
         oponente_info = '  '.join([info if str(info) in 'X-' else '0' for info in tabuleiro_oponente[linha]])
         texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
     return texto
+
+import random as rd
 
 ##################################
 ###### DEFINIÇÃO DAS FROTAS ######
@@ -207,7 +203,8 @@ tabuleiro_jogador = posiciona_frota(frota_jogador)
 ########################################
 
 jogando = True
-jogadas = []
+jogadas_jogador = []
+jogadas_oponente = []
 
 while jogando:
     print(monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente))
@@ -228,17 +225,57 @@ while jogando:
         print('coluna inválida!')
         coluna = int(input('Em que coluna deseja atacar? '))
 
+
     # Verifica se a posição já foi atacada:
-    if [linha, coluna] in jogadas:
+    while [linha, coluna] in jogadas_jogador:
+
         print(f'A posição linha {linha} e coluna {coluna} já foi atacada anteriormente!')
-    else:
-        jogadas.append([linha, coluna])
+
+        linha = int(input('Em que linha deseja atacar? '))
+        while linha < 0 or linha > 9:
+            print('linha inválida!')
+            linha = int(input('Em que linha deseja atacar? '))
+
+        coluna = int(input('Em que coluna deseja atacar? '))
+        while coluna < 0 or coluna > 9:
+            print('coluna inválida!')
+            coluna = int(input('Em que coluna deseja atacar? '))
+    
+    
+    # Adiciona a jogada na lista de jogadas:
+    jogadas_jogador.append([linha, coluna])
     
 
     # Faz a jogada e verifica se afundou algum navio:
     tabuleiro_oponente = faz_jogada(tabuleiro_oponente, linha, coluna)
-    navios_afundados = afundados(frota_oponente, tabuleiro_oponente)
-
-    if navios_afundados == 10:
+    navios_afundados = 0
+    # Verifica se o jogador venceu:
+    if afundados(frota_oponente, tabuleiro_oponente) == 10:
         print('Parabéns! Você derrubou todos os navios do seu oponente!')
         jogando = False
+    else:
+
+        ###################################
+        ######## VEZ DO OPONENTE ##########
+        ###################################
+
+        # Gera uma posição aleatória:
+        linha_oponente = rd.randint(0, 9)
+        coluna_oponente = rd.randint(0, 9)
+
+        while [linha_oponente, coluna_oponente] in jogadas_oponente:
+            linha_oponente = rd.randint(0, 9)
+            coluna_oponente = rd.randint(0, 9)
+        
+        jogadas_oponente.append([linha_oponente, coluna_oponente])
+
+        print(f'Seu oponente está atacando na linha {linha_oponente} e coluna {coluna_oponente}.')
+
+        tabuleiro_jogador = faz_jogada(tabuleiro_jogador, linha_oponente, coluna_oponente)
+
+        navios_afundados_jogador = 0
+
+        # Verifica se o oponente venceu:
+        if afundados(frota_jogador, tabuleiro_jogador) == 10:
+            print('Xi! O oponente derrubou toda a sua frota =(')
+            jogando = False
