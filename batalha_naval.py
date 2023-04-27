@@ -1,4 +1,6 @@
-## Funções ##
+##################################
+###### DEFINIÇÃO DAS FUNÇÕES #####
+##################################
 
 # Define as posições do navio de acordo com a orientação
 def define_posicoes(linha, coluna, orientacao, tamanho):
@@ -113,6 +115,9 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
         texto += f'{linha}| {jogador_info}|     {linha}| {oponente_info}|\n'
     return texto
 
+##################################
+###### DEFINIÇÃO DAS FROTAS ######
+##################################
 
 # Frota do oponente:
 frota_oponente = {
@@ -222,7 +227,6 @@ while jogando:
     while coluna < 0 or coluna > 9:
         print('coluna inválida!')
         coluna = int(input('Em que coluna deseja atacar? '))
-
 
     # Verifica se a posição já foi atacada:
     if [linha, coluna] in jogadas:
