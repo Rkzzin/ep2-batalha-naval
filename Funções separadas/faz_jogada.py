@@ -1,5 +1,6 @@
-# Realiza a jogada do usuário
+# Faz a jogada e confere se acertou ou errou
 def faz_jogada(tabuleiro, linha, coluna):
+
     # Caso tenha navio na posição, substitui o 1 por X
     if tabuleiro[linha][coluna] == 1 or tabuleiro[linha][coluna] == 'X':
         tabuleiro[linha][coluna] = 'X'
@@ -7,6 +8,7 @@ def faz_jogada(tabuleiro, linha, coluna):
     # Caso não tenha navio na posição, substitui o 0 por -
     else:
         tabuleiro[linha][coluna] = '-'
+
     return tabuleiro
 
 tabuleiro = [

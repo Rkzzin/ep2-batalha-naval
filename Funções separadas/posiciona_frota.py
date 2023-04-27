@@ -1,3 +1,4 @@
+# Retorna o tabuleiro com as posições dos navios
 def posiciona_frota(frota):
     # Cria o tabuleiro
     tabuleiro = [[0]*10 for _ in range(10)]

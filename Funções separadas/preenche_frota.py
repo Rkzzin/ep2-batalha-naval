@@ -14,6 +14,7 @@ def define_posicoes(linha, coluna, orientacao, tamanho):
 
     return posicoes
 
+# Preenche a frota com os navios
 def preenche_frota(frota, nome_navio, linha, coluna, orientacao, tamanho):
 
     # Verifica se o navio já está na frota

@@ -31,6 +31,7 @@ def posicao_valida(frota, linha, coluna, orientacao, tamanho):
                     return False
 
     return True
+        
 
 
 frota = {
@@ -51,7 +52,7 @@ frota = {
     ],
 }
 linha = 1
-coluna = 5
+coluna = 1
 orientacao = 'horizontal'
 tamanho = 4
 resultado = posicao_valida(frota, linha, coluna, orientacao, tamanho)
