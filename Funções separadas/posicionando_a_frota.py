@@ -106,4 +106,3 @@ while quantidade_embarcacoes < 10:
         print('Esta posição não está válida!')
 
 print(frota)
-
